@@ -13,7 +13,11 @@ Comment.init(
         },
         user_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: 'user',
+                key: 'id'
+            }
         },
         comment_text: {
             type: DataTypes.STRING,
@@ -24,8 +28,21 @@ Comment.init(
         },
         post_id: {
             type: DataTypes.STRING,
+            allowNull: false,
+            references: {
+                model: 'post',
+                key: 'id'
+            }
+        },
+        user_name: {
+            type: DataTypes.STRING,
             allowNull: false
-        }
+        },
+        comment_date: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+
     }, 
     {
         sequelize,

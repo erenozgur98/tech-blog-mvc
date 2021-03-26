@@ -12,7 +12,8 @@ User.init(
             allowNull: false,
             primaryKey: true,
             autoIncrement: true
-        }, username: {
+        },
+        username: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true
@@ -24,6 +25,13 @@ User.init(
                 //  this is for to make sure the pw is at least 4 characters long
                 len: [4]
             }
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            }   
         }
     },
     {
