@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const { Comment, Post } = require('../models');
-const User = require('../models/User');
+const { Comment, Post, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req,res) => {
@@ -8,10 +7,8 @@ router.get('/', async (req,res) => {
         const techData = await Post.findAll({
             include: [
                 {
-                    model: Comment,
-                    attributes: [
-                        
-                    ],
+                    model: User,
+                    attributes: ["name"]
                 },
             ],
         });
@@ -20,17 +17,10 @@ router.get('/', async (req,res) => {
         post.get({ plain: true })
         );
 
-        req.session.save(() => {
-            if (req.session.countVisit) {
-                req.session.countVisit++;
-            } else {
-                req.session.countVisit = 1;
-            }
-
-            res.render('homepage', {
-                countVisit: req.session.countVisit,
-            });
-        });
+        res.render('homepage', {
+            posts,
+            logged_in: req.session.logged_in
+        })
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -42,11 +32,11 @@ router.get('/post/:id', async (req,res) => {
         const techData = await Post.findByPk(req.params.id, {
             include: [
                 {
-                    model: Comment,
+                    model: User,
                     attributes: [ 'name' ],
                 },
                 {
-                    model: User
+                    model: Comment
                 }
             ],
         });
@@ -69,7 +59,7 @@ router.get('/profile', withAuth, async (req, res) => {
             include: [{ model: Post }],
         });
 
-        const user = userdata.get({ plain: true });
+        const user = userData.get({ plain: true });
         res.render('profile', {
             user,
             logged_in: true,

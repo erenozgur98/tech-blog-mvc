@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { json } = require('sequelize/types');
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
@@ -28,7 +27,7 @@ router.get('/:id', (req, res) => {
 router.post('/', withAuth, (req, res) => {
    if (req.session) {
        Comment.create({
-           comment_text: req.body.comment_text,
+           comment_content: req.body.comment_text,
            post_id: req.body.post_id,
            user_id: req.session.user_id,
        })
