@@ -1,0 +1,14 @@
+[
+    {
+        "post_title": "New Post",
+        "post_content": "This is a new post from seeds"
+    },
+    {
+        "post_title": "New Post 2",
+        "post_content": "This is a new post 2 from seeds"
+    },
+    {
+        "post_title": "New Post 3",
+        "post_content": "This is a new post 3 from seeds"
+    }
+]

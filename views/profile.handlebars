@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-auto">
+        <h2>Welcome, {{user.name}}</h2>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <h3>Create a new post</h3>
+        <form class="form mnew-post-form">
+            <div class="form-group">
+                <label for="post-name">Post Title:</label>
+                <input type="text" class="form-input" id="post-name" name="post-name">
+            </div>
+            <div class="form-group">
+                <label for="post-name">Post Body:</label>
+                <input type="text" class="form-input" id="post-name" name="post-name">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Post</button>
+            </div>
+        </form>
+    </div>
+
+    {{#if user.posts.length}}
+    <div class="col-mb-6 post-list">
+        <h3>Current Posts:</h3>
+        {{#each user.posts}}
+        <div class="row mb-2">
+            <div class="col-mb-8">
+                <h4><a href="/post/{{id}}">{{post_title}}</a></h4>
+            </div>
+            <div class="col-mb-4">
+                <button class="btn btn-sm btn-danger" data-id="{{id}}">DELETE</button>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+</div>
+
+<script src="/js/profile.js"></script>

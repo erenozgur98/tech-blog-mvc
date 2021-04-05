@@ -1,14 +1,21 @@
-<div class="card">
-    <h3 class="card-header">Create New Post</h3>
-    <form class="card-body new-post-form" id="new-post-form">
-        <label for="post-title" class="form-label">Title</label>
-        <input type="text" id="post-title" name="post-title" class="form-input" />
+<div class="text-center">
+    <h2>{{post.post_title}}</h2>
+    <p>{{post.post_content}}</p>
+    <p>Created By: {{user.name}} on {{date_created}}</p>
+    <div class="card">
+        <div class="card-header">
+            <form class="card-body comment-form" id="comment-form">
+                <label class="form-label">Comment</label>
+                <input id="comment" name="comment-body" class="form-input" />
 
-        <label class="form-label" for="content">Content</label>
-        <input type="text" id="post-title" name="post-title" class="form-input" />
-
-        <button type="submit" class="btn">Create</button>
-    </form>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </div>
 </div>
 
-<script src="/js/new-post.js"></script>
+{{#each post.comments}}
+    {{>comment}}
+{{/each}}
+
+<script src="/js/post.js"></script>
