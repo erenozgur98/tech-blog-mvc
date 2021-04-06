@@ -6,7 +6,7 @@ const addPost = async (e) => {
     ];
 
     if (postContent) {
-        const response = await fetch ('/api/comments', {
+        const response = await fetch ('/api/post', {
             method: 'POST',
             body: JSON.stringify({ comment_content: postContent, post_id: postID}),
             headers: {
@@ -21,4 +21,4 @@ const addPost = async (e) => {
     }
 };
 
-document.querySelector('.comment-form').addEventListener('submit', addPost);
+document.querySelector('#comment-form').addEventListener('submit', addPost);

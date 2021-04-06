@@ -19,7 +19,7 @@ router.get('/', async (req,res) => {
 
         res.render('homepage', {
             posts,
-            logged_in: req.session.logged_in
+            loggedIn: req.session.loggedIn
         })
     } catch (err) {
         console.log(err);
@@ -45,14 +45,14 @@ router.get('/post/:id', async (req,res) => {
 
         res.render('post', {
             post,
-            logged_in: req.session.logged_in,
+            loggedIn: req.session.loggedIn,
         });
     } catch (err) {
         res.status(500).res.json(err);
     }
 });
 
-router.get('/profile', withAuth, async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] },
@@ -62,7 +62,7 @@ router.get('/profile', withAuth, async (req, res) => {
         const user = userData.get({ plain: true });
         res.render('profile', {
             user,
-            logged_in: true,
+            loggedIn: true,
         });
     } catch (err) {
         res.status(500).json(err);
@@ -70,7 +70,7 @@ router.get('/profile', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-    if (req.session.logged_in) {
+    if (req.session.loggedIn) {
         res.redirect('/profile');
         return;
     }
